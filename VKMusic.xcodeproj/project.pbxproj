@@ -22,6 +22,7 @@
 		1CA12E1C1954C6840049F412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DFB1954C6840049F412 /* UIKit.framework */; };
 		1CA12E241954C6840049F412 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E221954C6840049F412 /* InfoPlist.strings */; };
 		1CA12E261954C6840049F412 /* VKMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E251954C6840049F412 /* VKMusicTests.m */; };
+		1CA12E301954D1670049F412 /* 150.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E2F1954D1670049F412 /* 150.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		1CA12E211954C6840049F412 /* VKMusicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VKMusicTests-Info.plist"; sourceTree = "<group>"; };
 		1CA12E231954C6840049F412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1CA12E251954C6840049F412 /* VKMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKMusicTests.m; sourceTree = "<group>"; };
+		1CA12E2F1954D1670049F412 /* 150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 150.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		1CA12DEB1954C6840049F412 = {
 			isa = PBXGroup;
 			children = (
+				1CA12E2F1954D1670049F412 /* 150.png */,
 				1CA12DFD1954C6840049F412 /* VKMusic */,
 				1CA12E1F1954C6840049F412 /* VKMusicTests */,
 				1CA12DF61954C6840049F412 /* Frameworks */,
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CA12E0E1954C6840049F412 /* Main_iPad.storyboard in Resources */,
+				1CA12E301954D1670049F412 /* 150.png in Resources */,
 				1CA12E131954C6840049F412 /* Images.xcassets in Resources */,
 				1CA12E0B1954C6840049F412 /* Main_iPhone.storyboard in Resources */,
 				1CA12E021954C6840049F412 /* InfoPlist.strings in Resources */,
@@ -395,6 +399,7 @@
 				GCC_PREFIX_HEADER = "VKMusic/VKMusic-Prefix.pch";
 				INFOPLIST_FILE = "VKMusic/VKMusic-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -408,6 +413,7 @@
 				GCC_PREFIX_HEADER = "VKMusic/VKMusic-Prefix.pch";
 				INFOPLIST_FILE = "VKMusic/VKMusic-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
