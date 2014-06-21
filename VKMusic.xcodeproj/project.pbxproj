@@ -23,6 +23,8 @@
 		1CA12E241954C6840049F412 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E221954C6840049F412 /* InfoPlist.strings */; };
 		1CA12E261954C6840049F412 /* VKMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E251954C6840049F412 /* VKMusicTests.m */; };
 		1CA12E301954D1670049F412 /* 150.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E2F1954D1670049F412 /* 150.png */; };
+		1CA12E3B1954D4F10049F412 /* libVKSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12E381954D4E40049F412 /* libVKSdk.a */; };
+		1CA12E45195583D60049F412 /* VKSdkResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E43195583B40049F412 /* VKSdkResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1CA12DF31954C6840049F412;
 			remoteInfo = VKMusic;
+		};
+		1CA12E371954D4E40049F412 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CA12E321954D4E40049F412 /* sdk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3C7542D182133CC00964716;
+			remoteInfo = VKSdk;
+		};
+		1CA12E391954D4E40049F412 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CA12E321954D4E40049F412 /* sdk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3BACC401865905B003158DA;
+			remoteInfo = VKSdkResources;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -57,6 +73,8 @@
 		1CA12E231954C6840049F412 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1CA12E251954C6840049F412 /* VKMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKMusicTests.m; sourceTree = "<group>"; };
 		1CA12E2F1954D1670049F412 /* 150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 150.png; sourceTree = "<group>"; };
+		1CA12E321954D4E40049F412 /* sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sdk.xcodeproj; path = "vk-ios-sdk/sdk/sdk.xcodeproj"; sourceTree = "<group>"; };
+		1CA12E43195583B40049F412 /* VKSdkResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = VKSdkResources.bundle; path = "vk-ios-sdk/VKSdkResources.bundle"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CA12E3B1954D4F10049F412 /* libVKSdk.a in Frameworks */,
 				1CA12DFA1954C6840049F412 /* CoreGraphics.framework in Frameworks */,
 				1CA12DFC1954C6840049F412 /* UIKit.framework in Frameworks */,
 				1CA12DF81954C6840049F412 /* Foundation.framework in Frameworks */,
@@ -87,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				1CA12E2F1954D1670049F412 /* 150.png */,
+				1CA12E43195583B40049F412 /* VKSdkResources.bundle */,
+				1CA12E311954D4CA0049F412 /* Vendor */,
 				1CA12DFD1954C6840049F412 /* VKMusic */,
 				1CA12E1F1954C6840049F412 /* VKMusicTests */,
 				1CA12DF61954C6840049F412 /* Frameworks */,
@@ -158,6 +179,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1CA12E311954D4CA0049F412 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				1CA12E321954D4E40049F412 /* sdk.xcodeproj */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		1CA12E331954D4E40049F412 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CA12E381954D4E40049F412 /* libVKSdk.a */,
+				1CA12E3A1954D4E40049F412 /* VKSdkResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -222,6 +260,12 @@
 			mainGroup = 1CA12DEB1954C6840049F412;
 			productRefGroup = 1CA12DF51954C6840049F412 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1CA12E331954D4E40049F412 /* Products */;
+					ProjectRef = 1CA12E321954D4E40049F412 /* sdk.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1CA12DF31954C6840049F412 /* VKMusic */,
@@ -230,6 +274,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		1CA12E381954D4E40049F412 /* libVKSdk.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libVKSdk.a;
+			remoteRef = 1CA12E371954D4E40049F412 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1CA12E3A1954D4E40049F412 /* VKSdkResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = VKSdkResources.bundle;
+			remoteRef = 1CA12E391954D4E40049F412 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		1CA12DF21954C6840049F412 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -237,6 +298,7 @@
 			files = (
 				1CA12E0E1954C6840049F412 /* Main_iPad.storyboard in Resources */,
 				1CA12E301954D1670049F412 /* 150.png in Resources */,
+				1CA12E45195583D60049F412 /* VKSdkResources.bundle in Resources */,
 				1CA12E131954C6840049F412 /* Images.xcassets in Resources */,
 				1CA12E0B1954C6840049F412 /* Main_iPhone.storyboard in Resources */,
 				1CA12E021954C6840049F412 /* InfoPlist.strings in Resources */,
@@ -397,6 +459,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMusic/VKMusic-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/Macintosh\\ HD/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(SRCROOT)/vk-ios-sdk/sdk/sdk/**",
+				);
 				INFOPLIST_FILE = "VKMusic/VKMusic-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -411,6 +478,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMusic/VKMusic-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/Macintosh\\ HD/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(SRCROOT)/vk-ios-sdk/sdk/sdk/**",
+				);
 				INFOPLIST_FILE = "VKMusic/VKMusic-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
