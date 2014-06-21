@@ -7,6 +7,7 @@
 //
 
 #import "GFStartViewController.h"
+#import "GFAudiosViewController.h"
 #import "VKSdk.h" 
 
 static NSString *const APP_ID = @"4423585";
@@ -32,7 +33,7 @@ static NSArray  * SCOPE = nil;
 	[VKSdk initializeWithDelegate:self andAppId:APP_ID];
     if ([VKSdk wakeUpSession])
     {
-        [self startWorking];
+        [self startWorkingWithAnimated:NO];
     }
 }
 
@@ -42,17 +43,9 @@ static NSArray  * SCOPE = nil;
 	[VKSdk authorize:SCOPE revokeAccess:YES forceOAuth:YES inApp:YES display:VK_DISPLAY_IOS];
 }
 
-- (void)startWorking {
-//    [self callMethod:[[VKApi friends] get]];
-    VKRequest * audioReq = [VKApi requestWithMethod:@"audio.get"
-                                       andParameters:@{VK_API_OWNER_ID : @"2446593"} andHttpMethod:@"GET"];
-	[audioReq executeWithResultBlock: ^(VKResponse *response) {
-	    NSLog(@"%@", response.request.requestTiming);
-        VKAudios *audios = [[VKAudios alloc] initWithDictionary:response.json];
-        audios.items;
-	} errorBlock: ^(NSError *error) {
-	    ;
-    }];
+- (void)startWorkingWithAnimated:(BOOL)animated {
+    GFAudiosViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GFAudiosViewController"];
+    [self.navigationController pushViewController:controller animated:animated];
 }
 
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
@@ -65,7 +58,7 @@ static NSArray  * SCOPE = nil;
 }
 
 - (void)vkSdkReceivedNewToken:(VKAccessToken *)newToken {
-    [self startWorking];
+    [self startWorkingWithAnimated:YES];
 }
 
 - (void)vkSdkShouldPresentViewController:(UIViewController *)controller {
@@ -73,7 +66,7 @@ static NSArray  * SCOPE = nil;
 }
 
 - (void)vkSdkAcceptedUserToken:(VKAccessToken *)token {
-    [self startWorking];
+    [self startWorkingWithAnimated:YES];
 }
 
 - (void)vkSdkUserDeniedAccess:(VKError *)authorizationError {
