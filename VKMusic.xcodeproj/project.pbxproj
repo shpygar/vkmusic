@@ -15,7 +15,7 @@
 		1CA12E081954C6840049F412 /* GFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E071954C6840049F412 /* GFAppDelegate.m */; };
 		1CA12E0B1954C6840049F412 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E091954C6840049F412 /* Main_iPhone.storyboard */; };
 		1CA12E0E1954C6840049F412 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E0C1954C6840049F412 /* Main_iPad.storyboard */; };
-		1CA12E111954C6840049F412 /* GFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E101954C6840049F412 /* GFViewController.m */; };
+		1CA12E111954C6840049F412 /* GFStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E101954C6840049F412 /* GFStartViewController.m */; };
 		1CA12E131954C6840049F412 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E121954C6840049F412 /* Images.xcassets */; };
 		1CA12E1A1954C6840049F412 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12E191954C6840049F412 /* XCTest.framework */; };
 		1CA12E1B1954C6840049F412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF71954C6840049F412 /* Foundation.framework */; };
@@ -25,6 +25,7 @@
 		1CA12E301954D1670049F412 /* 150.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E2F1954D1670049F412 /* 150.png */; };
 		1CA12E3B1954D4F10049F412 /* libVKSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12E381954D4E40049F412 /* libVKSdk.a */; };
 		1CA12E45195583D60049F412 /* VKSdkResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E43195583B40049F412 /* VKSdkResources.bundle */; };
+		1CA12E481955DA200049F412 /* GFAudiosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E471955DA200049F412 /* GFAudiosViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +65,8 @@
 		1CA12E071954C6840049F412 /* GFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFAppDelegate.m; sourceTree = "<group>"; };
 		1CA12E0A1954C6840049F412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		1CA12E0D1954C6840049F412 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		1CA12E0F1954C6840049F412 /* GFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFViewController.h; sourceTree = "<group>"; };
-		1CA12E101954C6840049F412 /* GFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFViewController.m; sourceTree = "<group>"; };
+		1CA12E0F1954C6840049F412 /* GFStartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFStartViewController.h; sourceTree = "<group>"; };
+		1CA12E101954C6840049F412 /* GFStartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFStartViewController.m; sourceTree = "<group>"; };
 		1CA12E121954C6840049F412 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1CA12E181954C6840049F412 /* VKMusicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VKMusicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA12E191954C6840049F412 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -75,6 +76,8 @@
 		1CA12E2F1954D1670049F412 /* 150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 150.png; sourceTree = "<group>"; };
 		1CA12E321954D4E40049F412 /* sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sdk.xcodeproj; path = "vk-ios-sdk/sdk/sdk.xcodeproj"; sourceTree = "<group>"; };
 		1CA12E43195583B40049F412 /* VKSdkResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = VKSdkResources.bundle; path = "vk-ios-sdk/VKSdkResources.bundle"; sourceTree = "<group>"; };
+		1CA12E461955DA200049F412 /* GFAudiosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFAudiosViewController.h; sourceTree = "<group>"; };
+		1CA12E471955DA200049F412 /* GFAudiosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFAudiosViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +145,10 @@
 				1CA12E071954C6840049F412 /* GFAppDelegate.m */,
 				1CA12E091954C6840049F412 /* Main_iPhone.storyboard */,
 				1CA12E0C1954C6840049F412 /* Main_iPad.storyboard */,
-				1CA12E0F1954C6840049F412 /* GFViewController.h */,
-				1CA12E101954C6840049F412 /* GFViewController.m */,
+				1CA12E0F1954C6840049F412 /* GFStartViewController.h */,
+				1CA12E101954C6840049F412 /* GFStartViewController.m */,
+				1CA12E461955DA200049F412 /* GFAudiosViewController.h */,
+				1CA12E471955DA200049F412 /* GFAudiosViewController.m */,
 				1CA12E121954C6840049F412 /* Images.xcassets */,
 				1CA12DFE1954C6840049F412 /* Supporting Files */,
 			);
@@ -320,8 +325,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CA12E481955DA200049F412 /* GFAudiosViewController.m in Sources */,
 				1CA12E041954C6840049F412 /* main.m in Sources */,
-				1CA12E111954C6840049F412 /* GFViewController.m in Sources */,
+				1CA12E111954C6840049F412 /* GFStartViewController.m in Sources */,
 				1CA12E081954C6840049F412 /* GFAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

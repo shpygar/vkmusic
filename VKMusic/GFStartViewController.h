@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GFViewController : UIViewController
+@interface GFStartViewController : UIViewController
 
 @end
