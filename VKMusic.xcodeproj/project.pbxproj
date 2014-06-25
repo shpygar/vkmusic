@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C91F55E1958D29B00BFC020 /* GFSeekSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */; };
 		1CA12DF81954C6840049F412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF71954C6840049F412 /* Foundation.framework */; };
 		1CA12DFA1954C6840049F412 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF91954C6840049F412 /* CoreGraphics.framework */; };
 		1CA12DFC1954C6840049F412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DFB1954C6840049F412 /* UIKit.framework */; };
@@ -26,6 +27,9 @@
 		1CA12E3B1954D4F10049F412 /* libVKSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12E381954D4E40049F412 /* libVKSdk.a */; };
 		1CA12E45195583D60049F412 /* VKSdkResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CA12E43195583B40049F412 /* VKSdkResources.bundle */; };
 		1CA12E481955DA200049F412 /* GFAudiosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E471955DA200049F412 /* GFAudiosViewController.m */; };
+		1CA12E4F1955F5BA0049F412 /* GFPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA12E4E1955F5BA0049F412 /* GFPlayerViewController.m */; };
+		1CA44D7D195A0E8D002D0D64 /* GFAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA44D7C195A0E8D002D0D64 /* GFAudioPlayer.m */; };
+		1CA44D81195A2E89002D0D64 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA44D80195A2E89002D0D64 /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFSeekSlider.h; sourceTree = "<group>"; };
+		1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFSeekSlider.m; sourceTree = "<group>"; };
 		1CA12DF41954C6840049F412 /* VKMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA12DF71954C6840049F412 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1CA12DF91954C6840049F412 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,6 +84,11 @@
 		1CA12E43195583B40049F412 /* VKSdkResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = VKSdkResources.bundle; path = "vk-ios-sdk/VKSdkResources.bundle"; sourceTree = "<group>"; };
 		1CA12E461955DA200049F412 /* GFAudiosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFAudiosViewController.h; sourceTree = "<group>"; };
 		1CA12E471955DA200049F412 /* GFAudiosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFAudiosViewController.m; sourceTree = "<group>"; };
+		1CA12E4D1955F5BA0049F412 /* GFPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFPlayerViewController.h; sourceTree = "<group>"; };
+		1CA12E4E1955F5BA0049F412 /* GFPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFPlayerViewController.m; sourceTree = "<group>"; };
+		1CA44D7B195A0E8D002D0D64 /* GFAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFAudioPlayer.h; sourceTree = "<group>"; };
+		1CA44D7C195A0E8D002D0D64 /* GFAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFAudioPlayer.m; sourceTree = "<group>"; };
+		1CA44D80195A2E89002D0D64 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CA44D81195A2E89002D0D64 /* MediaPlayer.framework in Frameworks */,
 				1CA12E3B1954D4F10049F412 /* libVKSdk.a in Frameworks */,
 				1CA12DFA1954C6840049F412 /* CoreGraphics.framework in Frameworks */,
 				1CA12DFC1954C6840049F412 /* UIKit.framework in Frameworks */,
@@ -130,6 +142,7 @@
 		1CA12DF61954C6840049F412 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1CA44D80195A2E89002D0D64 /* MediaPlayer.framework */,
 				1CA12DF71954C6840049F412 /* Foundation.framework */,
 				1CA12DF91954C6840049F412 /* CoreGraphics.framework */,
 				1CA12DFB1954C6840049F412 /* UIKit.framework */,
@@ -149,6 +162,12 @@
 				1CA12E101954C6840049F412 /* GFStartViewController.m */,
 				1CA12E461955DA200049F412 /* GFAudiosViewController.h */,
 				1CA12E471955DA200049F412 /* GFAudiosViewController.m */,
+				1CA12E4D1955F5BA0049F412 /* GFPlayerViewController.h */,
+				1CA12E4E1955F5BA0049F412 /* GFPlayerViewController.m */,
+				1CA44D7B195A0E8D002D0D64 /* GFAudioPlayer.h */,
+				1CA44D7C195A0E8D002D0D64 /* GFAudioPlayer.m */,
+				1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */,
+				1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */,
 				1CA12E121954C6840049F412 /* Images.xcassets */,
 				1CA12DFE1954C6840049F412 /* Supporting Files */,
 			);
@@ -325,10 +344,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CA12E4F1955F5BA0049F412 /* GFPlayerViewController.m in Sources */,
 				1CA12E481955DA200049F412 /* GFAudiosViewController.m in Sources */,
 				1CA12E041954C6840049F412 /* main.m in Sources */,
 				1CA12E111954C6840049F412 /* GFStartViewController.m in Sources */,
 				1CA12E081954C6840049F412 /* GFAppDelegate.m in Sources */,
+				1C91F55E1958D29B00BFC020 /* GFSeekSlider.m in Sources */,
+				1CA44D7D195A0E8D002D0D64 /* GFAudioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +577,7 @@
 				1CA12E2B1954C6840049F412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1CA12E2C1954C6840049F412 /* Build configuration list for PBXNativeTarget "VKMusicTests" */ = {
 			isa = XCConfigurationList;
@@ -563,6 +586,7 @@
 				1CA12E2E1954C6840049F412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
