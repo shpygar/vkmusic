@@ -8,6 +8,7 @@
 
 #import "GFAudiosViewController.h"
 #import "VKSdk.h"
+#import "GFPlayerViewController.h"
 
 @interface GFAudiosViewController ()
 
@@ -31,14 +32,15 @@
     [super viewDidLoad];
 
     self.navigationItem.hidesBackButton = YES;
-    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.items = @[];
     [self update];
 }
 
 -(void)update{
+    NSString *userId = [VKSdk getAccessToken].userId;
     VKRequest * audioReq = [VKApi requestWithMethod:@"audio.get"
-                                      andParameters:@{VK_API_OWNER_ID : @"2446593"} andHttpMethod:@"GET"];
+                                      andParameters:@{VK_API_OWNER_ID : userId} andHttpMethod:@"GET"];
 	[audioReq executeWithResultBlock: ^(VKResponse *response) {
 	    VKAudios *audios = [[VKAudios alloc] initWithDictionary:response.json objectClass:[VKAudio class]];
         self.items = audios.items;
@@ -71,6 +73,15 @@
     cell.detailTextLabel.text = audio.artist;
 
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    GFPlayerViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GFPlayerViewController"];
+    controller.audio = self.items[indexPath.row];
+    [self.navigationController pushViewController:controller animated:YES];
+
 }
 
 @end
