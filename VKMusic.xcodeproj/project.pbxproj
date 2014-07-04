@@ -35,6 +35,7 @@
 		1CA44D8F195B567F002D0D64 /* _GFPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA44D89195B567F002D0D64 /* _GFPlaylist.m */; };
 		1CA44D90195B567F002D0D64 /* GFAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA44D8B195B567F002D0D64 /* GFAudio.m */; };
 		1CA44D91195B567F002D0D64 /* GFPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA44D8D195B567F002D0D64 /* GFPlaylist.m */; };
+		1CA44D9E195B573B002D0D64 /* GFMappingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA44D95195B573B002D0D64 /* GFMappingManager.m */; };
 		1CA44DA0195B573B002D0D64 /* GFModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA44D9A195B573B002D0D64 /* GFModelManager.m */; };
 		1CA44DA1195B573B002D0D64 /* NSManagedObjectContext+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA44D9C195B573B002D0D64 /* NSManagedObjectContext+Helpers.m */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,8 @@
 		1CA44D8B195B567F002D0D64 /* GFAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFAudio.m; sourceTree = "<group>"; };
 		1CA44D8C195B567F002D0D64 /* GFPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFPlaylist.h; sourceTree = "<group>"; };
 		1CA44D8D195B567F002D0D64 /* GFPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFPlaylist.m; sourceTree = "<group>"; };
+		1CA44D94195B573A002D0D64 /* GFMappingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFMappingManager.h; sourceTree = "<group>"; };
+		1CA44D95195B573B002D0D64 /* GFMappingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFMappingManager.m; sourceTree = "<group>"; };
 		1CA44D99195B573B002D0D64 /* GFModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFModelManager.h; sourceTree = "<group>"; };
 		1CA44D9A195B573B002D0D64 /* GFModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFModelManager.m; sourceTree = "<group>"; };
 		1CA44D9B195B573B002D0D64 /* NSManagedObjectContext+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Helpers.h"; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				1CA12E061954C6840049F412 /* GFAppDelegate.h */,
 				1CA12E071954C6840049F412 /* GFAppDelegate.m */,
 				1CA44D93195B569B002D0D64 /* Model */,
+				1CA44D94195B573A002D0D64 /* GFMappingManager.h */,
+				1CA44D95195B573B002D0D64 /* GFMappingManager.m */,
 				1CA44D99195B573B002D0D64 /* GFModelManager.h */,
 				1CA44D9A195B573B002D0D64 /* GFModelManager.m */,
 				1CA44D9B195B573B002D0D64 /* NSManagedObjectContext+Helpers.h */,
@@ -402,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CA44D8F195B567F002D0D64 /* _GFPlaylist.m in Sources */,
+				1CA44D9E195B573B002D0D64 /* GFMappingManager.m in Sources */,
 				1CA12E4F1955F5BA0049F412 /* GFPlayerViewController.m in Sources */,
 				1CA44D91195B567F002D0D64 /* GFPlaylist.m in Sources */,
 				1CA12E481955DA200049F412 /* GFAudiosViewController.m in Sources */,
