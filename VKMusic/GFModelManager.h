@@ -13,6 +13,8 @@
 #import "GFAudio.h"
 #import "GFPlaylist.h"
 
+#define kDefaultPlaylistID 666
+
 @interface GFModelManager : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

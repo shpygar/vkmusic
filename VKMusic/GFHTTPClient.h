@@ -16,6 +16,6 @@ typedef void (^GFHTTPClientCompletionBlock)(GFPlaylist *playlist, BOOL success, 
 
 + (instancetype)sharedClient;
 
-- (void)getAudiosWithCompletion:(GFHTTPClientCompletionBlock)completion;
+-(void)getAudiosOfPlaylist:(NSUInteger)playlistID completion:(GFHTTPClientCompletionBlock)completion;
 
 @end

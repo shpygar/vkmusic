@@ -11,9 +11,9 @@
 #import "GFPlayerViewController.h"
 #import "GFAudioPlayer.h"
 
-@interface GFAudiosViewController () <UISearchDisplayDelegate>
+@interface GFAudiosViewController () <UISearchDisplayDelegate, NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSOrderedSet *items;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -34,8 +34,7 @@
 
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.items = [NSOrderedSet orderedSet];
-    [self updateData:nil];
+//    [self updateData:nil];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(updateData:) forControlEvents:UIControlEventValueChanged];
@@ -43,11 +42,9 @@
 }
 
 -(void)updateData:(UIRefreshControl*)sender{
-    [[GFHTTPClient sharedClient] getAudiosWithCompletion:^(GFPlaylist *playlist, BOOL success, NSError *error) {
+    [[GFHTTPClient sharedClient] getAudiosOfPlaylist:kDefaultPlaylistID completion:^(GFPlaylist *playlist, BOOL success, NSError *error) {
         [sender endRefreshing];
-        self.items = playlist.audios;
-        [self.tableView reloadData];
-	}];
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -64,16 +61,40 @@
     [self showPlayerWithAudio:nil];
 }
 
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (! _fetchedResultsController) {
+        NSFetchRequest *fetchRequest = [[GFModelManager sharedManager] fetchRequestWithPlaylistID:kDefaultPlaylistID sortKey:[NSSortDescriptor sortDescriptorWithKey:@"audioID" ascending:NO]];
+        _fetchedResultsController = [[NSFetchedResultsController alloc]
+                                     initWithFetchRequest:fetchRequest
+                                     managedObjectContext:[GFModelManager sharedManager].managedObjectContext
+                                     sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController.delegate = self;
+        [_fetchedResultsController performFetch:NULL];
+    }
+    return _fetchedResultsController;
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.fetchedResultsController = nil;
+        [self.tableView reloadData];
+    });
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.items count];
+    return [[self.fetchedResultsController sections][section] numberOfObjects];
 }
 
 
@@ -81,7 +102,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GFAudioViewCell" forIndexPath:indexPath];
     // Configure the cell...
-    GFAudio *audio = self.items[indexPath.row];
+    GFAudio *audio = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = audio.title;
     cell.detailTextLabel.text = audio.artist;
 
@@ -90,8 +111,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    [self showPlayerWithAudio:self.items[indexPath.row]];
+    
+    GFAudio *audio = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self showPlayerWithAudio:audio];
 }
 
 -(void)showPlayerWithAudio:(GFAudio *)audio{

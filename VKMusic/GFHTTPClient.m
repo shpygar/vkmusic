@@ -13,8 +13,6 @@
 #import "VKSdk.h"
 
 
-#define kDefaultPlaylistID 666
-
 @interface GFHTTPClient ()
 
 @property (nonatomic, strong) GFMappingManager *objectsParser;
@@ -44,7 +42,7 @@
     return _objectsParser;
 }
 
--(void)getAudiosWithCompletion:(GFHTTPClientCompletionBlock)completion{
+-(void)getAudiosOfPlaylist:(NSUInteger)playlistID completion:(GFHTTPClientCompletionBlock)completion{
     NSString *userId = [VKSdk getAccessToken].userId;
     VKRequest * audioReq = [VKApi requestWithMethod:@"audio.get"
                                       andParameters:@{VK_API_OWNER_ID : userId} andHttpMethod:@"GET"];
@@ -55,10 +53,10 @@
                 GFPlaylist *playlist = nil;
                 NSManagedObjectContext *context = [GFModelManager sharedManager].managedObjectContext;
                 NSError *error = nil;
-                playlist = [context objectWithEntityName:[GFPlaylist entityName] value:@(kDefaultPlaylistID) forKey:@"playlistID"];
+                playlist = [context objectWithEntityName:[GFPlaylist entityName] value:@(playlistID) forKey:@"playlistID"];
                 if (! playlist) {
                     playlist = [GFPlaylist insertInManagedObjectContext:context];
-                    playlist.playlistID = @(kDefaultPlaylistID);
+                    playlist.playlistID = @(playlistID);
                 }
                 
                 [self.objectsParser importAudios:audios.items
