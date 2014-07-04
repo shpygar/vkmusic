@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C28F74719635A6B00A63F9B /* GFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C28F74419635A6B00A63F9B /* GFHTTPClient.m */; };
 		1C91F55E1958D29B00BFC020 /* GFSeekSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */; };
 		1CA12DF81954C6840049F412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF71954C6840049F412 /* Foundation.framework */; };
 		1CA12DFA1954C6840049F412 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF91954C6840049F412 /* CoreGraphics.framework */; };
@@ -65,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C28F74419635A6B00A63F9B /* GFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFHTTPClient.m; sourceTree = "<group>"; };
+		1C28F74519635A6B00A63F9B /* GFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFHTTPClient.h; sourceTree = "<group>"; };
 		1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFSeekSlider.h; sourceTree = "<group>"; };
 		1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFSeekSlider.m; sourceTree = "<group>"; };
 		1CA12DF41954C6840049F412 /* VKMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +187,8 @@
 				1CA44D95195B573B002D0D64 /* GFMappingManager.m */,
 				1CA44D99195B573B002D0D64 /* GFModelManager.h */,
 				1CA44D9A195B573B002D0D64 /* GFModelManager.m */,
+				1C28F74519635A6B00A63F9B /* GFHTTPClient.h */,
+				1C28F74419635A6B00A63F9B /* GFHTTPClient.m */,
 				1CA44D9B195B573B002D0D64 /* NSManagedObjectContext+Helpers.h */,
 				1CA44D9C195B573B002D0D64 /* NSManagedObjectContext+Helpers.m */,
 				1CA12E091954C6840049F412 /* Main_iPhone.storyboard */,
@@ -330,6 +335,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Sergey Shpygar";
 				TargetAttributes = {
+					1CA12DF31954C6840049F412 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					1CA12E171954C6840049F412 = {
 						TestTargetID = 1CA12DF31954C6840049F412;
 					};
@@ -408,6 +420,7 @@
 			files = (
 				1CA44D8F195B567F002D0D64 /* _GFPlaylist.m in Sources */,
 				1CA44D9E195B573B002D0D64 /* GFMappingManager.m in Sources */,
+				1C28F74719635A6B00A63F9B /* GFHTTPClient.m in Sources */,
 				1CA12E4F1955F5BA0049F412 /* GFPlayerViewController.m in Sources */,
 				1CA44D91195B567F002D0D64 /* GFPlaylist.m in Sources */,
 				1CA12E481955DA200049F412 /* GFAudiosViewController.m in Sources */,
