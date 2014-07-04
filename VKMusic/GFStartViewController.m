@@ -8,7 +8,7 @@
 
 #import "GFStartViewController.h"
 #import "GFAudiosViewController.h"
-#import "VKSdk.h" 
+#import "VKSdk.h"
 
 static NSString *const APP_ID = @"4423585";
 static NSString *const TOKEN_KEY = @"ZzQn3IIiASAkOos3ckSi";

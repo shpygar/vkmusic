@@ -10,6 +10,9 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "GFSeekSlider.h"
 #import "GFAudioPlayer.h"
+#import "GFAudio.h"
+#import "GFPlaylist.h"
+
 
 @interface GFPlayerViewController () <GFSeekSliderDelegate, GFAudioPlayerDelegate>
 
@@ -39,7 +42,6 @@
 @property (assign, nonatomic) CGFloat speedMovedSlider;
 
 @property (strong, nonatomic) GFAudioPlayer *player;
-@property (nonatomic, weak) id  playerItemCurrentTimeObserver;
 @property (nonatomic, assign) CGFloat restoreAfterSeekRate;
 
 - (IBAction)tooglePlay:(id)sender;
@@ -57,11 +59,6 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-//        _timerUpdated = [NSTimer scheduledTimerWithTimeInterval:1.f
-//                                                         target:self
-//                                                       selector:@selector(updateInformation)
-//                                                       userInfo:nil
-//                                                        repeats:YES];
     }
     return self;
 }
@@ -75,13 +72,7 @@
 }
 
 -(void)destroyPlayer{
-    if (self.playerItemCurrentTimeObserver) {
-        [self.player.player removeTimeObserver:self.playerItemCurrentTimeObserver];
-        self.playerItemCurrentTimeObserver = nil;
-    }
-    
     self.player.delegate = nil;
-    [self.player destroyPlayer];
     self.player = nil;
 }
 
@@ -90,29 +81,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self configureWithAudio:self.audio];
-
+    [self configureWithAudio:nil];
     self.sliderMoveEnabled = YES;
     [self.seekBar setDelegate:self];
 }
 
--(void)configureWithAudio:(VKAudio *)audio{
-    [self destroyPlayer];
-    
-    self.titleLabel.text = audio.title;
-    self.subtitleLabel.text = audio.artist;
-    
+-(void)configureWithAudio:(GFAudio *)audio{
     self.player = [GFAudioPlayer sharedManager];
-    [self updateStatusWithAudioPlayer:self.player];
     self.player.delegate = self;
-    self.player.path = audio.url;
-    
-}
-
--(void)setAudio:(VKAudio *)audio{
-    _audio = audio;
-    if (self.isViewLoaded) {
-        [self configureWithAudio:audio];
+    if (audio) {
+        self.player.audio = audio;
+        [self.player play];
+    }
+    if ([self isViewLoaded]) {
+        [self audioPlayerUpdatedCurrentAudio:self.player];
+        [self audioPlayerUpdatedSeekableTimeRanges:self.player];
     }
 }
 
@@ -123,15 +106,14 @@
     else{
         [self.player play];
     }
-    [self updateStatusWithAudioPlayer:self.player];
 }
 
 - (IBAction)previous:(id)sender{
-    
+    [self.player previous];
 }
 
 - (IBAction)next:(id)sender{
-    
+    [self.player next];
 }
 
 - (IBAction)share:(id)sender{
@@ -148,7 +130,7 @@
 #pragma mark -
 
 -(void)changeY:(NSNumber *)value{
-    if (self.sliderMoveEnabled==NO) {
+    if (!self.sliderMoveEnabled) {
         NSInteger change = [value intValue] - self.seekBar.frame.origin.y;
         if (change > 150) {
             self.speedSeekLabel.text = @"Точный скраббинг";
@@ -169,13 +151,9 @@
     }
 }
 
--(void)updateInformation{
-    [self updateStatusWithAudioPlayer:self.player];
-}
-
 - (NSString*) stringTime:(NSUInteger)duration {
-	int min = floor(duration / 60);
-	int sec = duration % 60;
+	NSUInteger min = floor(duration / 60);
+	NSUInteger sec = floor(duration % 60);
     return [NSString stringWithFormat:@"%d:%02d", min, sec];
 }
 
@@ -186,7 +164,7 @@
 		
         float seconds = [sender value];
         
-        [self.player.player seekToTime:CMTimeMakeWithSeconds(seconds, NSEC_PER_SEC)];
+        [self.player setCurrentTime:CMTimeMakeWithSeconds(seconds, NSEC_PER_SEC)];
 
         self.sliderMoveEnabled = YES;
         
@@ -208,74 +186,74 @@
 }
 
 - (IBAction)progressSliderValueChanged:(UISlider*)sender {
-    double duration = [self.audio.duration doubleValue];
-	if (self.speedMovedSlider > 0) {
+    double duration = sender.maximumValue - sender.minimumValue;
+    if (self.speedMovedSlider > 0) {
         sender.value = self.oldProgressValue + (sender.value - self.oldProgressValue)*self.speedMovedSlider;
     }
     else{
         sender.value = self.oldProgressValue + ((sender.value - self.oldProgressValue)>0 ? 1/duration : -1/duration);
     }
     self.oldProgressValue = sender.value;
-    self.leftTimeLabel.text = [self stringTime:self.oldProgressValue];
-	self.rightTimeLabel.text = [NSString stringWithFormat:@"-%@", [self stringTime:(duration - self.oldProgressValue)]];
+    
+    [self updateTimeLabelsWithCurrentTime:self.oldProgressValue];
 }
 
 #pragma mark - ITAudioPlayer Delegate
 
--(void)createPeriodicTimer{
-    if (self.playerItemCurrentTimeObserver) {
-        [self.player.player removeTimeObserver:self.playerItemCurrentTimeObserver];
-        self.playerItemCurrentTimeObserver = nil;
-    }
-    self.playerItemCurrentTimeObserver = [self.player.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1.0f, NSEC_PER_SEC) queue:nil usingBlock:^(CMTime time) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self updateTimeWithAudioPlayer:self.player];
-        });
-    }];
-}
-
--(void)updateStatusWithAudioPlayer:(GFAudioPlayer *)player{
+-(void)audioPlayerUpdatedStatus:(GFAudioPlayer *)player{
     [self.playButton setSelected:[player isPlaying]];
-    [self updateTimeWithAudioPlayer:player];
+    [self audioPlayerUpdatedSeekableTimeRanges:player];
 }
 
--(void)updateTimeWithAudioPlayer:(GFAudioPlayer *)player{
+-(void)audioPlayerUpdatedCurrentAudio:(GFAudioPlayer *)player{
+    self.titleLabel.text = player.audio.title;
+    self.subtitleLabel.text = player.audio.artist;
+    GFPlaylist *playlist = self.player.audio.playlist;
+    NSUInteger currentIndex = [playlist.audios indexOfObject:self.player.audio];
+    if (currentIndex != NSNotFound) {
+        NSUInteger countAudios = [playlist.audios count];
+        self.numberLabel.text = [NSString stringWithFormat:@"%d из %d", currentIndex + 1, countAudios];
+        [self.previousButton setEnabled:(currentIndex > 0)];
+        [self.nextButton setEnabled:(currentIndex < countAudios - 1)];
+    }
+    [self audioPlayerUpdatedStatus:player];
+}
+
+-(void)audioPlayerUpdatedCurrentTime:(GFAudioPlayer *)player{
     if (self.sliderMoveEnabled) {
+        float seconds = CMTimeGetSeconds(player.currentTime);
+        [self.seekBar setValue:seconds animated:YES];
         
-        float startSeconds = 0.f;
-        float endSeconds = 1.f;
-        float seconds = 0.0f;
-        
-        NSArray *seekableTimeRanges = [player.player.currentItem seekableTimeRanges];
+        [self updateTimeLabelsWithCurrentTime:seconds];
+    }
+}
+
+-(void)audioPlayerUpdatedSeekableTimeRanges:(GFAudioPlayer *)player{
+    if (self.sliderMoveEnabled) {
+        NSArray *seekableTimeRanges = [self.player.currentItem seekableTimeRanges];
+        float startSeconds = 0, endSeconds = 0;
         if ([seekableTimeRanges count] > 0)
         {
             NSValue *range = seekableTimeRanges[0];
             CMTimeRange timeRange = [range CMTimeRangeValue];
             
             startSeconds = CMTimeGetSeconds(timeRange.start);
-            endSeconds = CMTimeGetSeconds(CMTimeRangeGetEnd(timeRange));
-            seconds = CMTimeGetSeconds(player.player.currentTime);
-            
-            if (!self.playerItemCurrentTimeObserver && !self.restoreAfterSeekRate) {
-                [self createPeriodicTimer];
-            }
-            
-            if (seconds == endSeconds) {
-                [self.player.player seekToTime:CMTimeMakeWithSeconds(0, NSEC_PER_SEC)];
-            }
+            endSeconds = CMTimeGetSeconds(timeRange.duration);
         }
-        [self.seekBar setEnabled:endSeconds != 1.0f];
-        [self.playButton setEnabled:endSeconds != 1.0f];
+        [self.seekBar setEnabled:endSeconds != 0.0f];
+        [self.playButton setEnabled:endSeconds != 0.0f];
         
         [self.seekBar setMinimumValue:startSeconds];
         [self.seekBar setMaximumValue:endSeconds];
-        [self.seekBar setValue:seconds animated:YES];
         
-        self.leftTimeLabel.text = [self stringTime:floor(seconds - startSeconds)];
-        self.rightTimeLabel.text = [NSString stringWithFormat:@"-%@", [self stringTime:floor(endSeconds - seconds)]];
+        [self audioPlayerUpdatedCurrentTime:player];
 	}
 }
 
+-(void)updateTimeLabelsWithCurrentTime:(CGFloat)seconds{
+    self.leftTimeLabel.text = [self stringTime:floor(seconds - self.seekBar.minimumValue)];
+    self.rightTimeLabel.text = [NSString stringWithFormat:@"-%@", [self stringTime:floor(self.seekBar.maximumValue - seconds)]];
 
+}
 
 @end

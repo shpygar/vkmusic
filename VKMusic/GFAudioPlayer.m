@@ -7,8 +7,12 @@
 //
 
 #import "GFAudioPlayer.h"
+#import "GFPlaylist.h"
 
 @interface GFAudioPlayer ()
+
+@property (nonatomic, weak) id  playerItemCurrentTimeObserver;
+@property (nonatomic, readonly) AVPlayer *player;
 
 @end
 
@@ -46,66 +50,126 @@
     [self.player play];
 }
 
+-(void)setCurrentTime:(CMTime)currentTime{
+    [self.player seekToTime:currentTime];
+}
+
+-(CMTime)currentTime{
+    return [self.player currentTime];
+}
+
+-(AVPlayerItem *)currentItem{
+    return self.player.currentItem;
+}
+
+-(void)next{
+    NSOrderedSet *audios = self.audio.playlist.audios;
+    NSUInteger index =[audios indexOfObject:self.audio];
+    if ( index != NSNotFound && index + 1 < audios.count ) {
+        [self setAudio:audios[index + 1]];
+    }
+}
+
+-(void)previous{
+    NSOrderedSet *audios = self.audio.playlist.audios;
+    NSUInteger index =[audios indexOfObject:self.audio];
+    if ( index != NSNotFound && index > 0 ) {
+        [self setAudio:audios[index - 1]];
+    }
+}
+
 -(void)updateStatus{
     switch (self.player.currentItem.status) {
         case AVPlayerItemStatusReadyToPlay:
             break;
         case AVPlayerItemStatusFailed:
+            [self next];
             NSLog(@"AVPlayerItemStatusFailed %@", self.player.currentItem.error);
             break;
         case AVPlayerItemStatusUnknown:
             break;
     }
     
-    if ([self.delegate respondsToSelector:@selector(updateStatusWithAudioPlayer:)]) {
-        [self.delegate updateStatusWithAudioPlayer:self];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate audioPlayerUpdatedStatus:self];
+    });
 }
 
--(void)updateSeekableTimeRanges{
-    if ([self.delegate respondsToSelector:@selector(updateTimeWithAudioPlayer:)]) {
-        [self.delegate updateTimeWithAudioPlayer:self];
-    }  
+-(void)createPeriodicTimer{
+    if (self.playerItemCurrentTimeObserver) {
+        [self.player removeTimeObserver:self.playerItemCurrentTimeObserver];
+        self.playerItemCurrentTimeObserver = nil;
+    }
+    __weak GFAudioPlayer *wself = self;
+    self.playerItemCurrentTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1.0f, NSEC_PER_SEC) queue:nil usingBlock:^(CMTime time) {
+        [wself.delegate audioPlayerUpdatedCurrentTime:wself];
+    }];
 }
 
 -(BOOL)isPlaying{
     return self.player && self.player.rate > 0;
 }
 
-- (void)setPath:(NSString *)path{
-    _path = path;
-	[self destroyPlayer];
-    
-    if (path) {
-        NSURL *url = [NSURL URLWithString:path];
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:url];
-        [playerItem seekToTime:kCMTimeZero];
-        _player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-        [self.player addObserver:self
-                      forKeyPath:@"rate"
-                         options:NSKeyValueObservingOptionNew
-                         context:nil];
-   
-        [self.player.currentItem addObserver:self
-                      forKeyPath:@"status"
-                         options:NSKeyValueObservingOptionNew
-                         context:nil];
-       
-        [self.player.currentItem addObserver:self
-                                  forKeyPath:@"seekableTimeRanges"
-                                     options:NSKeyValueObservingOptionNew
-                                     context:nil];
+- (void)setAudio:(GFAudio *)audio{
+    if (_audio != audio) {
+        _audio = audio;
+        
+        BOOL isPlaying = [self isPlaying];
+        if (isPlaying) {
+            [self pause];
+        }
+        [self destroyPlayer];
+        if (audio) {
+            NSURL *url = [NSURL URLWithString:audio.url];
+            AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:url];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+            [playerItem seekToTime:kCMTimeZero];
+            _player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+            
+            [self.delegate audioPlayerUpdatedCurrentAudio:self];
+            
+            [self createPeriodicTimer];
+            
+            [self.player addObserver:self
+                          forKeyPath:@"rate"
+                             options:NSKeyValueObservingOptionNew
+                             context:nil];
+            
+            [self.player.currentItem addObserver:self
+                                      forKeyPath:@"status"
+                                         options:NSKeyValueObservingOptionNew
+                                         context:nil];
+            
+            [self.player.currentItem addObserver:self
+                                      forKeyPath:@"seekableTimeRanges"
+                                         options:NSKeyValueObservingOptionNew
+                                         context:nil];
+            if (isPlaying) {
+                [self play];
+            }
+        }
     }
+}
+
+-(void)itemDidFinishPlaying:(NSNotification *) notification {
+    // Will be called when AVPlayer finishes playing playerItem
+    [self next];
+    [self play];
 }
 
 - (void)destroyPlayer
 {
 	if (self.player){
-		[self.player pause];
-      
+		[self pause];
+        if (self.playerItemCurrentTimeObserver) {
+            [self.player removeTimeObserver:self.playerItemCurrentTimeObserver];
+            self.playerItemCurrentTimeObserver = nil;
+        }
+        
         [self.player removeObserver:self forKeyPath:@"rate"];
         [self.player.currentItem removeObserver:self forKeyPath:@"status"];
         [self.player.currentItem removeObserver:self forKeyPath:@"seekableTimeRanges"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
         
        _player = nil;
     }
@@ -119,8 +183,15 @@
     if ([keyPath isEqualToString:@"seekableTimeRanges"]) {
         [self updateSeekableTimeRanges];
     }
-    else{
+    else {
         [self updateStatus];
     }
 }
+
+-(void)updateSeekableTimeRanges{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate audioPlayerUpdatedSeekableTimeRanges:self];
+    });
+}
+
 @end

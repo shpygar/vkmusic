@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VKSdk.h"
+
+@class GFAudio;
 
 @interface GFPlayerViewController : UIViewController
 
-@property (nonatomic, strong) VKAudio *audio;
+-(void)configureWithAudio:(GFAudio *)audio;
 
 @end

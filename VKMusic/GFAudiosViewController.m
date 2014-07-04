@@ -7,12 +7,13 @@
 //
 
 #import "GFAudiosViewController.h"
-#import "VKSdk.h"
+#import "GFHTTPClient.h"
 #import "GFPlayerViewController.h"
+#import "GFAudioPlayer.h"
 
-@interface GFAudiosViewController ()
+@interface GFAudiosViewController () <UISearchDisplayDelegate>
 
-@property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong) NSOrderedSet *items;
 
 @end
 
@@ -33,22 +34,29 @@
 
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.items = @[];
+    self.items = [NSOrderedSet orderedSet];
     [self update];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    UIBarButtonItem *playerItem = nil;
+    if ([[GFAudioPlayer sharedManager] currentItem]) {
+        playerItem = [[UIBarButtonItem alloc] initWithTitle:@"Плеер" style:UIBarButtonItemStylePlain target:self action:@selector(showPlayer)];
+    }
+    self.navigationItem.rightBarButtonItem = playerItem;
+}
+
+-(void)showPlayer{
+    [self showPlayerWithAudio:nil];
+}
+
 -(void)update{
-    NSString *userId = [VKSdk getAccessToken].userId;
-    VKRequest * audioReq = [VKApi requestWithMethod:@"audio.get"
-                                      andParameters:@{VK_API_OWNER_ID : userId} andHttpMethod:@"GET"];
-	[audioReq executeWithResultBlock: ^(VKResponse *response) {
-	    VKAudios *audios = [[VKAudios alloc] initWithDictionary:response.json objectClass:[VKAudio class]];
-        self.items = audios.items;
+    [[GFHTTPClient sharedClient] getAudiosWithCompletion:^(GFPlaylist *playlist, BOOL success, NSError *error) {
+        self.items = playlist.audios;
         [self.tableView reloadData];
-	}
-                          errorBlock: ^(NSError *error) {
-	    ;
-    }];
+	}];
 }
 
 #pragma mark - Table view data source
@@ -68,7 +76,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GFAudioViewCell" forIndexPath:indexPath];
     // Configure the cell...
-    VKAudio *audio = self.items[indexPath.row];
+    GFAudio *audio = self.items[indexPath.row];
     cell.textLabel.text = audio.title;
     cell.detailTextLabel.text = audio.artist;
 
@@ -78,10 +86,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    GFPlayerViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GFPlayerViewController"];
-    controller.audio = self.items[indexPath.row];
-    [self.navigationController pushViewController:controller animated:YES];
+    [self showPlayerWithAudio:self.items[indexPath.row]];
+}
 
+-(void)showPlayerWithAudio:(GFAudio *)audio{
+    GFPlayerViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GFPlayerViewController"];
+    [controller configureWithAudio:audio];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end
