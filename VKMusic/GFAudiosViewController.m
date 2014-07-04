@@ -35,7 +35,19 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.items = [NSOrderedSet orderedSet];
-    [self update];
+    [self updateData:nil];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(updateData:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+}
+
+-(void)updateData:(UIRefreshControl*)sender{
+    [[GFHTTPClient sharedClient] getAudiosWithCompletion:^(GFPlaylist *playlist, BOOL success, NSError *error) {
+        [sender endRefreshing];
+        self.items = playlist.audios;
+        [self.tableView reloadData];
+	}];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -50,13 +62,6 @@
 
 -(void)showPlayer{
     [self showPlayerWithAudio:nil];
-}
-
--(void)update{
-    [[GFHTTPClient sharedClient] getAudiosWithCompletion:^(GFPlaylist *playlist, BOOL success, NSError *error) {
-        self.items = playlist.audios;
-        [self.tableView reloadData];
-	}];
 }
 
 #pragma mark - Table view data source
