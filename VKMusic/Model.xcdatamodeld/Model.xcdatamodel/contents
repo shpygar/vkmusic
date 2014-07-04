@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Audio" representedClassName="GFAudio" syncable="YES">
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="audioID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Playlist" inverseName="audios" inverseEntity="Playlist" syncable="YES"/>
+    </entity>
+    <entity name="Playlist" representedClassName="GFPlaylist" syncable="YES">
+        <attribute name="playlistID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="audios" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Audio" inverseName="playlist" inverseEntity="Audio" syncable="YES"/>
+        <relationship name="currentAudio" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Audio" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Audio" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Playlist" positionX="-54" positionY="18" width="128" height="103"/>
+    </elements>
+</model>
