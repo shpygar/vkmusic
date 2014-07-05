@@ -316,10 +316,10 @@
             </objects>
             <point key="canvasLocation" x="1018" y="-79"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Remote View Controller-->
         <scene sceneID="tUx-VU-Mt6">
             <objects>
-                <navigationController definesPresentationContext="YES" id="HyH-ak-Sob" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="GFRemoteViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HyH-ak-Sob" customClass="GFRemoteViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sRy-KJ-5PZ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

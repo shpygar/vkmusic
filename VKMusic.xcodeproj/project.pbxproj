@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1C28F74719635A6B00A63F9B /* GFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C28F74419635A6B00A63F9B /* GFHTTPClient.m */; };
+		1C764D221967E11B00C2C4E6 /* RemoteControllWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C764D211967E11B00C2C4E6 /* RemoteControllWindow.m */; };
+		1C764D251967E24F00C2C4E6 /* GFRemoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C764D241967E24F00C2C4E6 /* GFRemoteViewController.m */; };
 		1C91F55E1958D29B00BFC020 /* GFSeekSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */; };
 		1CA12DF81954C6840049F412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF71954C6840049F412 /* Foundation.framework */; };
 		1CA12DFA1954C6840049F412 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF91954C6840049F412 /* CoreGraphics.framework */; };
@@ -68,6 +70,10 @@
 /* Begin PBXFileReference section */
 		1C28F74419635A6B00A63F9B /* GFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFHTTPClient.m; sourceTree = "<group>"; };
 		1C28F74519635A6B00A63F9B /* GFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFHTTPClient.h; sourceTree = "<group>"; };
+		1C764D201967E11B00C2C4E6 /* RemoteControllWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteControllWindow.h; sourceTree = "<group>"; };
+		1C764D211967E11B00C2C4E6 /* RemoteControllWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControllWindow.m; sourceTree = "<group>"; };
+		1C764D231967E24F00C2C4E6 /* GFRemoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRemoteViewController.h; sourceTree = "<group>"; };
+		1C764D241967E24F00C2C4E6 /* GFRemoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFRemoteViewController.m; sourceTree = "<group>"; };
 		1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFSeekSlider.h; sourceTree = "<group>"; };
 		1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFSeekSlider.m; sourceTree = "<group>"; };
 		1CA12DF41954C6840049F412 /* VKMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +207,10 @@
 				1CA12E4E1955F5BA0049F412 /* GFPlayerViewController.m */,
 				1CA44D7B195A0E8D002D0D64 /* GFAudioPlayer.h */,
 				1CA44D7C195A0E8D002D0D64 /* GFAudioPlayer.m */,
+				1C764D201967E11B00C2C4E6 /* RemoteControllWindow.h */,
+				1C764D211967E11B00C2C4E6 /* RemoteControllWindow.m */,
+				1C764D231967E24F00C2C4E6 /* GFRemoteViewController.h */,
+				1C764D241967E24F00C2C4E6 /* GFRemoteViewController.m */,
 				1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */,
 				1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */,
 				1CA12E121954C6840049F412 /* Images.xcassets */,
@@ -419,7 +429,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CA44D8F195B567F002D0D64 /* _GFPlaylist.m in Sources */,
+				1C764D221967E11B00C2C4E6 /* RemoteControllWindow.m in Sources */,
 				1CA44D9E195B573B002D0D64 /* GFMappingManager.m in Sources */,
+				1C764D251967E24F00C2C4E6 /* GFRemoteViewController.m in Sources */,
 				1C28F74719635A6B00A63F9B /* GFHTTPClient.m in Sources */,
 				1CA12E4F1955F5BA0049F412 /* GFPlayerViewController.m in Sources */,
 				1CA44D91195B567F002D0D64 /* GFPlaylist.m in Sources */,
@@ -568,6 +580,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMusic/VKMusic-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -578,6 +592,7 @@
 				INFOPLIST_FILE = "VKMusic/VKMusic-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "29AC1FEE-7809-40E9-A781-9BAD67A22166";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -588,6 +603,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMusic/VKMusic-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -598,6 +615,7 @@
 				INFOPLIST_FILE = "VKMusic/VKMusic-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "29AC1FEE-7809-40E9-A781-9BAD67A22166";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

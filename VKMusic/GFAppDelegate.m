@@ -8,8 +8,18 @@
 
 #import "GFAppDelegate.h"
 #import "VKSdk.h" 
+#import "RemoteControllWindow.h"
+#import "GFRemoteViewController.h"
 
 @implementation GFAppDelegate
+
+
+- (RemoteControllWindow *)window
+{
+    static RemoteControllWindow *window = nil;
+    if (!window) window = [[RemoteControllWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    return window;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

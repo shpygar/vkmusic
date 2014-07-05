@@ -8,6 +8,8 @@
 
 #import "GFAudioPlayer.h"
 #import "GFPlaylist.h"
+#import <MediaPlayer/MediaPlayer.h>
+
 
 @interface GFAudioPlayer ()
 
@@ -89,7 +91,7 @@
         case AVPlayerItemStatusUnknown:
             break;
     }
-    
+    [self configureMediaInfo];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate audioPlayerUpdatedStatus:self];
     });
@@ -192,6 +194,47 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate audioPlayerUpdatedSeekableTimeRanges:self];
     });
+}
+
+#pragma mark -
+
+-(void) configureMediaInfo{
+    //    MPMediaItemPropertyAlbumTitle
+    //    MPMediaItemPropertyAlbumTrackCount
+    //    MPMediaItemPropertyAlbumTrackNumber
+    //    MPMediaItemPropertyArtist
+    //    MPMediaItemPropertyArtwork
+    //    MPMediaItemPropertyComposer
+    //    MPMediaItemPropertyDiscCount
+    //    MPMediaItemPropertyDiscNumber
+    //    MPMediaItemPropertyGenre
+    //    MPMediaItemPropertyPersistentID
+    //    MPMediaItemPropertyPlaybackDuration
+    //    MPMediaItemPropertyTitle
+    
+    GFPlaylist *playlist = self.audio.playlist;
+    
+    NSMutableDictionary *songInfo = @{MPMediaItemPropertyArtist : self.audio.artist,
+                                      MPMediaItemPropertyTitle : self.audio.title,
+                                      MPMediaItemPropertyAlbumTrackCount : @([playlist.audios count]),
+                                     MPNowPlayingInfoPropertyPlaybackRate : @([self.player rate]),
+                                      }.mutableCopy;
+    if (playlist.title) {
+        songInfo[MPMediaItemPropertyAlbumTitle] = playlist.title;
+    }
+
+    CGFloat duration = CMTimeGetSeconds([self.currentItem duration]);
+    if (duration) {
+        songInfo[MPMediaItemPropertyPlaybackDuration] = @(duration);
+        songInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = @(CMTimeGetSeconds(self.currentTime));
+    }
+    
+    NSUInteger index = [playlist.audios indexOfObject:self.audio];
+    if (index != NSNotFound) {
+        songInfo[MPMediaItemPropertyAlbumTrackNumber] = @(index);
+    }
+    [songInfo setObject:[[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:@"placeholder"]] forKey:MPMediaItemPropertyArtwork];
+    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
 }
 
 @end

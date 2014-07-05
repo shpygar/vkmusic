@@ -34,7 +34,9 @@
 
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-//    [self updateData:nil];
+    
+    [self updateData:nil];
+
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(updateData:) forControlEvents:UIControlEventValueChanged];
@@ -65,6 +67,11 @@
 {
     if (! _fetchedResultsController) {
         NSFetchRequest *fetchRequest = [[GFModelManager sharedManager] fetchRequestWithPlaylistID:kDefaultPlaylistID sortKey:[NSSortDescriptor sortDescriptorWithKey:@"audioID" ascending:NO]];
+        
+        if(self.searchDisplayController.isActive){
+            fetchRequest.predicate = [GFAudio predicateForSearchText:self.searchDisplayController.searchBar.text];
+        }
+        
         _fetchedResultsController = [[NSFetchedResultsController alloc]
                                      initWithFetchRequest:fetchRequest
                                      managedObjectContext:[GFModelManager sharedManager].managedObjectContext
@@ -79,6 +86,7 @@
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.fetchedResultsController.delegate = nil;
         self.fetchedResultsController = nil;
         [self.tableView reloadData];
     });
@@ -120,6 +128,38 @@
     GFPlayerViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"GFPlayerViewController"];
     [controller configureWithAudio:audio];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+#pragma mark UISearchDisplayController Delegate Methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+    [controller.searchResultsTableView reloadData];
+    
+    return YES;
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView{
+    tableView.backgroundColor = self.tableView.backgroundColor;
+    tableView.backgroundView = self.tableView.backgroundView;
+    
+    tableView.separatorColor = self.tableView.separatorColor;
+    tableView.separatorStyle = self.tableView.separatorStyle;
+    
+    tableView.rowHeight  = self.tableView.rowHeight;
+}
+
+-(void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView{
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
+{
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"GFAudioViewCell"];
 }
 
 @end
