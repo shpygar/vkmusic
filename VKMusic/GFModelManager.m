@@ -135,6 +135,30 @@
     return _persistentStoreCoordinator;
 }
 
+-(void)reset{
+    [self removeAllAudios];
+    [self removeAllPlaylists];
+    [self saveContext];
+}
+
+-(void)removeAllAudios{
+    NSManagedObjectContext * context = [self managedObjectContext];
+    NSFetchRequest * fetch = [[NSFetchRequest alloc] init];
+    [fetch setEntity:[NSEntityDescription entityForName:[GFAudio entityName] inManagedObjectContext:context]];
+    NSArray * result = [context executeFetchRequest:fetch error:nil];
+    for (id obj in result)
+        [context deleteObject:obj];
+}
+
+-(void)removeAllPlaylists{
+    NSManagedObjectContext * context = [self managedObjectContext];
+    NSFetchRequest * fetch = [[NSFetchRequest alloc] init];
+    [fetch setEntity:[NSEntityDescription entityForName:[GFPlaylist entityName] inManagedObjectContext:context]];
+    NSArray * result = [context executeFetchRequest:fetch error:nil];
+    for (id obj in result)
+        [context deleteObject:obj];
+}
+
 #pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.

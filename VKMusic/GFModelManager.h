@@ -29,4 +29,6 @@
 - (NSFetchRequest *)fetchRequestWithPlaylistID:(NSUInteger)playlistID;
 - (NSFetchRequest *)fetchRequestWithPlaylistID:(NSUInteger)playlistID sortKey:(NSSortDescriptor*)sortKey;
 
+-(void)reset;
+
 @end

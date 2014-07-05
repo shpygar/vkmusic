@@ -10,12 +10,14 @@
 #import "GFModelManager.h"
 
 
-typedef void (^GFHTTPClientCompletionBlock)(GFPlaylist *playlist, BOOL success, NSError *error);
+typedef void (^GFHTTPClientCompletionBlock)(BOOL success, NSError *error);
+typedef void (^GFHTTPClientPlaylistCompletionBlock)(GFPlaylist *playlist, BOOL success, NSError *error);
 
 @interface GFHTTPClient : NSObject
 
 + (instancetype)sharedClient;
 
--(void)getAudiosOfPlaylist:(NSUInteger)playlistID completion:(GFHTTPClientCompletionBlock)completion;
+-(void)getAudiosOfPlaylist:(NSUInteger)playlistID completion:(GFHTTPClientPlaylistCompletionBlock)completion;
+-(void)logout;
 
 @end

@@ -42,7 +42,7 @@
     return _objectsParser;
 }
 
--(void)getAudiosOfPlaylist:(NSUInteger)playlistID completion:(GFHTTPClientCompletionBlock)completion{
+-(void)getAudiosOfPlaylist:(NSUInteger)playlistID completion:(GFHTTPClientPlaylistCompletionBlock)completion{
     NSString *userId = [VKSdk getAccessToken].userId;
     VKRequest * audioReq = [VKApi requestWithMethod:@"audio.get"
                                       andParameters:@{VK_API_OWNER_ID : userId} andHttpMethod:@"GET"];
@@ -84,6 +84,11 @@
             completion(nil, NO, error);
         }
     }];
+}
+
+-(void)logout{
+    [VKSdk forceLogout];
+    [[GFModelManager sharedManager] reset];
 }
 
 @end

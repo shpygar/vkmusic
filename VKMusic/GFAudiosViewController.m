@@ -10,10 +10,11 @@
 #import "GFHTTPClient.h"
 #import "GFPlayerViewController.h"
 #import "GFAudioPlayer.h"
-
 @interface GFAudiosViewController () <UISearchDisplayDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
+- (IBAction)logout:(id)sender;
 
 @end
 
@@ -36,7 +37,6 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self updateData:nil];
-
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(updateData:) forControlEvents:UIControlEventValueChanged];
@@ -61,6 +61,11 @@
 
 -(void)showPlayer{
     [self showPlayerWithAudio:nil];
+}
+
+- (IBAction)logout:(id)sender{
+    [[GFHTTPClient sharedClient] logout];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController
