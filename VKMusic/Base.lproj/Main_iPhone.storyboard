@@ -12,9 +12,17 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="jG5-Ja-xwS">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="nvE-YV-Wx2" id="jVs-oC-R8L"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GFAudioViewCell" textLabel="pk2-N9-nLi" detailTextLabel="44k-of-NRI" style="IBUITableViewCellStyleSubtitle" id="FEF-Fx-URF">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FEF-Fx-URF" id="Kt8-fe-BZ6">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -45,8 +53,20 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Моя музыка" id="Lce-M4-hnK"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="fqQ-9m-ivn" id="4lf-eV-j8X"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kfU-KF-RQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="fqQ-9m-ivn">
+                    <connections>
+                        <outlet property="delegate" destination="nvE-YV-Wx2" id="eRc-W3-yQc"/>
+                        <outlet property="searchBar" destination="jG5-Ja-xwS" id="qJT-i6-qaY"/>
+                        <outlet property="searchContentsController" destination="nvE-YV-Wx2" id="x4s-zf-s7H"/>
+                        <outlet property="searchResultsDataSource" destination="nvE-YV-Wx2" id="dWa-Jb-bvJ"/>
+                        <outlet property="searchResultsDelegate" destination="nvE-YV-Wx2" id="Qsf-LV-PgM"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="540" y="-79"/>
         </scene>
@@ -273,24 +293,30 @@
                     <navigationItem key="navigationItem" id="z3I-KG-Gev">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="KBE-Mk-KOK">
-                            <rect key="frame" x="26" y="6" width="268" height="33"/>
+                            <rect key="frame" x="53" y="6" width="214" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haa-yR-UX2">
-                                    <rect key="frame" x="0.0" y="0.0" width="268" height="16"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="224" height="16"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uC3-Fl-xYH">
-                                    <rect key="frame" x="0.0" y="17" width="268" height="16"/>
+                                    <rect key="frame" x="0.0" y="17" width="224" height="16"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="u0B-bK-B6R">
+                            <connections>
+                                <action selector="share:" destination="Dyu-H1-sx0" id="kXV-qQ-BTX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -334,7 +360,7 @@
         <!--Start View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="GFStartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GFStartViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="GFStartViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>

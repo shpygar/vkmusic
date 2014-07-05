@@ -24,3 +24,27 @@
 }
 
 @end
+
+@implementation GFAudio (NSPredicate)
+
++ (NSPredicate*)predicateForSearchText:(NSString*)searchText {
+    if ([searchText length]) {
+        searchText = [searchText stringByReplacingOccurrencesOfString:@"," withString:@" "];
+        NSArray*  searchWords = [searchText componentsSeparatedByString:@" "];
+        NSMutableArray *predicates = [NSMutableArray arrayWithCapacity:searchWords.count];
+        for (NSString *word in searchWords) {
+            NSMutableArray* predicatesOfWord = [NSMutableArray array];
+            [predicatesOfWord addObject:[NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@", word]];
+            [predicatesOfWord addObject:[NSPredicate predicateWithFormat:@"artist CONTAINS[cd] %@", word]];
+            
+            [predicates addObject:[NSCompoundPredicate orPredicateWithSubpredicates:predicatesOfWord]];
+        }
+        return [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+    }
+    else{
+        return nil;
+    }
+}
+
+
+@end

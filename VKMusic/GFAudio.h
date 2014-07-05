@@ -11,3 +11,9 @@
 - (void)setValuesWithVKAudio:(VKAudio *) audio;
 
 @end
+
+@interface GFAudio (NSPredicate)
+
++ (NSPredicate*)predicateForSearchText:(NSString*)searchText;
+
+@end

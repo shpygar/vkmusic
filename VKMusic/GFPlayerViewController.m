@@ -116,9 +116,16 @@
     [self.player next];
 }
 
-- (IBAction)share:(id)sender{
+- (IBAction)share:(id)sender {
+    GFAudio *audio = self.player.audio;
+    NSArray *items = @[[NSString stringWithFormat:@"Слушаю «%@. %@»", audio.title, audio.artist]];
     
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+    activityViewController.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
+
 
 - (IBAction)toogleTopBar:(id)sender{
 }
