@@ -10,6 +10,8 @@
 #import "GFHTTPClient.h"
 #import "GFPlayerViewController.h"
 #import "GFAudioPlayer.h"
+#import "GFAudioViewCell.h"
+
 @interface GFAudiosViewController () <UISearchDisplayDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -113,7 +115,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GFAudioViewCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GFAudioViewCell" forIndexPath:indexPath];
+
     // Configure the cell...
     GFAudio *audio = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = audio.title;
@@ -149,10 +152,8 @@
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView{
     tableView.backgroundColor = self.tableView.backgroundColor;
     tableView.backgroundView = self.tableView.backgroundView;
-    
     tableView.separatorColor = self.tableView.separatorColor;
     tableView.separatorStyle = self.tableView.separatorStyle;
-    
     tableView.rowHeight  = self.tableView.rowHeight;
 }
 
@@ -164,7 +165,7 @@
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
 {
-    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"GFAudioViewCell"];
+    [tableView registerClass:[GFAudioViewCell class] forCellReuseIdentifier:@"GFAudioViewCell"];
 }
 
 @end

@@ -21,7 +21,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GFAudioViewCell" textLabel="pk2-N9-nLi" detailTextLabel="44k-of-NRI" style="IBUITableViewCellStyleSubtitle" id="FEF-Fx-URF">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="GFAudioViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GFAudioViewCell" textLabel="pk2-N9-nLi" detailTextLabel="44k-of-NRI" style="IBUITableViewCellStyleSubtitle" id="FEF-Fx-URF" customClass="GFAudioViewCell">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FEF-Fx-URF" id="Kt8-fe-BZ6">

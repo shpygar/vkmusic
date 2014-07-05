@@ -10,6 +10,7 @@
 		1C28F74719635A6B00A63F9B /* GFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C28F74419635A6B00A63F9B /* GFHTTPClient.m */; };
 		1C764D221967E11B00C2C4E6 /* RemoteControllWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C764D211967E11B00C2C4E6 /* RemoteControllWindow.m */; };
 		1C764D251967E24F00C2C4E6 /* GFRemoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C764D241967E24F00C2C4E6 /* GFRemoteViewController.m */; };
+		1C764D2F19686FA200C2C4E6 /* GFAudioViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C764D2E19686FA200C2C4E6 /* GFAudioViewCell.m */; };
 		1C91F55E1958D29B00BFC020 /* GFSeekSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */; };
 		1CA12DF81954C6840049F412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF71954C6840049F412 /* Foundation.framework */; };
 		1CA12DFA1954C6840049F412 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA12DF91954C6840049F412 /* CoreGraphics.framework */; };
@@ -74,6 +75,8 @@
 		1C764D211967E11B00C2C4E6 /* RemoteControllWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControllWindow.m; sourceTree = "<group>"; };
 		1C764D231967E24F00C2C4E6 /* GFRemoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRemoteViewController.h; sourceTree = "<group>"; };
 		1C764D241967E24F00C2C4E6 /* GFRemoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFRemoteViewController.m; sourceTree = "<group>"; };
+		1C764D2D19686FA200C2C4E6 /* GFAudioViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFAudioViewCell.h; sourceTree = "<group>"; };
+		1C764D2E19686FA200C2C4E6 /* GFAudioViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFAudioViewCell.m; sourceTree = "<group>"; };
 		1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFSeekSlider.h; sourceTree = "<group>"; };
 		1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFSeekSlider.m; sourceTree = "<group>"; };
 		1CA12DF41954C6840049F412 /* VKMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +152,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C764D2919686EC300C2C4E6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1CA44D94195B573A002D0D64 /* GFMappingManager.h */,
+				1CA44D95195B573B002D0D64 /* GFMappingManager.m */,
+				1C28F74519635A6B00A63F9B /* GFHTTPClient.h */,
+				1C28F74419635A6B00A63F9B /* GFHTTPClient.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		1C764D2A19686F0800C2C4E6 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				1CA12E4D1955F5BA0049F412 /* GFPlayerViewController.h */,
+				1CA12E4E1955F5BA0049F412 /* GFPlayerViewController.m */,
+				1CA44D7B195A0E8D002D0D64 /* GFAudioPlayer.h */,
+				1CA44D7C195A0E8D002D0D64 /* GFAudioPlayer.m */,
+				1C764D201967E11B00C2C4E6 /* RemoteControllWindow.h */,
+				1C764D211967E11B00C2C4E6 /* RemoteControllWindow.m */,
+				1C764D231967E24F00C2C4E6 /* GFRemoteViewController.h */,
+				1C764D241967E24F00C2C4E6 /* GFRemoteViewController.m */,
+				1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */,
+				1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		1C764D2B19686F1700C2C4E6 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				1CA12E461955DA200049F412 /* GFAudiosViewController.h */,
+				1CA12E471955DA200049F412 /* GFAudiosViewController.m */,
+				1C764D2D19686FA200C2C4E6 /* GFAudioViewCell.h */,
+				1C764D2E19686FA200C2C4E6 /* GFAudioViewCell.m */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		1C764D2C19686F2000C2C4E6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1CA12E0F1954C6840049F412 /* GFStartViewController.h */,
+				1CA12E101954C6840049F412 /* GFStartViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		1CA12DEB1954C6840049F412 = {
 			isa = PBXGroup;
 			children = (
@@ -189,30 +240,12 @@
 				1CA12E061954C6840049F412 /* GFAppDelegate.h */,
 				1CA12E071954C6840049F412 /* GFAppDelegate.m */,
 				1CA44D93195B569B002D0D64 /* Model */,
-				1CA44D94195B573A002D0D64 /* GFMappingManager.h */,
-				1CA44D95195B573B002D0D64 /* GFMappingManager.m */,
-				1CA44D99195B573B002D0D64 /* GFModelManager.h */,
-				1CA44D9A195B573B002D0D64 /* GFModelManager.m */,
-				1C28F74519635A6B00A63F9B /* GFHTTPClient.h */,
-				1C28F74419635A6B00A63F9B /* GFHTTPClient.m */,
-				1CA44D9B195B573B002D0D64 /* NSManagedObjectContext+Helpers.h */,
-				1CA44D9C195B573B002D0D64 /* NSManagedObjectContext+Helpers.m */,
+				1C764D2919686EC300C2C4E6 /* API */,
 				1CA12E091954C6840049F412 /* Main_iPhone.storyboard */,
 				1CA12E0C1954C6840049F412 /* Main_iPad.storyboard */,
-				1CA12E0F1954C6840049F412 /* GFStartViewController.h */,
-				1CA12E101954C6840049F412 /* GFStartViewController.m */,
-				1CA12E461955DA200049F412 /* GFAudiosViewController.h */,
-				1CA12E471955DA200049F412 /* GFAudiosViewController.m */,
-				1CA12E4D1955F5BA0049F412 /* GFPlayerViewController.h */,
-				1CA12E4E1955F5BA0049F412 /* GFPlayerViewController.m */,
-				1CA44D7B195A0E8D002D0D64 /* GFAudioPlayer.h */,
-				1CA44D7C195A0E8D002D0D64 /* GFAudioPlayer.m */,
-				1C764D201967E11B00C2C4E6 /* RemoteControllWindow.h */,
-				1C764D211967E11B00C2C4E6 /* RemoteControllWindow.m */,
-				1C764D231967E24F00C2C4E6 /* GFRemoteViewController.h */,
-				1C764D241967E24F00C2C4E6 /* GFRemoteViewController.m */,
-				1C91F55C1958D29B00BFC020 /* GFSeekSlider.h */,
-				1C91F55D1958D29B00BFC020 /* GFSeekSlider.m */,
+				1C764D2C19686F2000C2C4E6 /* Login */,
+				1C764D2B19686F1700C2C4E6 /* List */,
+				1C764D2A19686F0800C2C4E6 /* Player */,
 				1CA12E121954C6840049F412 /* Images.xcassets */,
 				1CA12DFE1954C6840049F412 /* Supporting Files */,
 			);
@@ -288,6 +321,10 @@
 			isa = PBXGroup;
 			children = (
 				1CA44D83195B51F4002D0D64 /* Model.xcdatamodeld */,
+				1CA44D99195B573B002D0D64 /* GFModelManager.h */,
+				1CA44D9A195B573B002D0D64 /* GFModelManager.m */,
+				1CA44D9B195B573B002D0D64 /* NSManagedObjectContext+Helpers.h */,
+				1CA44D9C195B573B002D0D64 /* NSManagedObjectContext+Helpers.m */,
 				1CA44D92195B5688002D0D64 /* Auto */,
 				1CA44D8A195B567F002D0D64 /* GFAudio.h */,
 				1CA44D8B195B567F002D0D64 /* GFAudio.m */,
@@ -444,6 +481,7 @@
 				1CA44D8E195B567F002D0D64 /* _GFAudio.m in Sources */,
 				1CA44DA0195B573B002D0D64 /* GFModelManager.m in Sources */,
 				1CA12E081954C6840049F412 /* GFAppDelegate.m in Sources */,
+				1C764D2F19686FA200C2C4E6 /* GFAudioViewCell.m in Sources */,
 				1C91F55E1958D29B00BFC020 /* GFSeekSlider.m in Sources */,
 				1CA44D7D195A0E8D002D0D64 /* GFAudioPlayer.m in Sources */,
 			);
