@@ -11,13 +11,11 @@ extern const struct GFPlaylistAttributes {
 
 extern const struct GFPlaylistRelationships {
 	__unsafe_unretained NSString *audios;
-	__unsafe_unretained NSString *currentAudio;
 } GFPlaylistRelationships;
 
 extern const struct GFPlaylistFetchedProperties {
 } GFPlaylistFetchedProperties;
 
-@class GFAudio;
 @class GFAudio;
 
 
@@ -67,13 +65,6 @@ extern const struct GFPlaylistFetchedProperties {
 
 
 
-@property (nonatomic, strong) GFAudio *currentAudio;
-
-//- (BOOL)validateCurrentAudio:(id*)value_ error:(NSError**)error_;
-
-
-
-
 
 @end
 
@@ -107,11 +98,6 @@ extern const struct GFPlaylistFetchedProperties {
 
 - (NSMutableOrderedSet*)primitiveAudios;
 - (void)setPrimitiveAudios:(NSMutableOrderedSet*)value;
-
-
-
-- (GFAudio*)primitiveCurrentAudio;
-- (void)setPrimitiveCurrentAudio:(GFAudio*)value;
 
 
 @end

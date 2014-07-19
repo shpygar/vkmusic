@@ -112,7 +112,6 @@
     return [[self.fetchedResultsController sections][section] numberOfObjects];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GFAudioViewCell" forIndexPath:indexPath];

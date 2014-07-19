@@ -10,7 +10,6 @@ const struct GFPlaylistAttributes GFPlaylistAttributes = {
 
 const struct GFPlaylistRelationships GFPlaylistRelationships = {
 	.audios = @"audios",
-	.currentAudio = @"currentAudio",
 };
 
 const struct GFPlaylistFetchedProperties GFPlaylistFetchedProperties = {
@@ -98,10 +97,6 @@ const struct GFPlaylistFetchedProperties GFPlaylistFetchedProperties = {
 	[self didAccessValueForKey:@"audios"];
 	return result;
 }
-	
-
-@dynamic currentAudio;
-
 	
 
 

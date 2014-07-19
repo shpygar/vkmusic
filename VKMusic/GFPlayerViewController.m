@@ -161,7 +161,7 @@
 - (NSString*) stringTime:(NSUInteger)duration {
 	NSUInteger min = floor(duration / 60);
 	NSUInteger sec = floor(duration % 60);
-    return [NSString stringWithFormat:@"%d:%02d", min, sec];
+    return [NSString stringWithFormat:@"%lu:%02lu", (unsigned long)min, (unsigned long)sec];
 }
 
 #pragma mark Slider
@@ -219,7 +219,7 @@
     NSUInteger currentIndex = [playlist.audios indexOfObject:self.player.audio];
     if (currentIndex != NSNotFound) {
         NSUInteger countAudios = [playlist.audios count];
-        self.numberLabel.text = [NSString stringWithFormat:@"%d из %d", currentIndex + 1, countAudios];
+        self.numberLabel.text = [NSString stringWithFormat:@"%lu из %lu", currentIndex + 1, countAudios];
         [self.previousButton setEnabled:(currentIndex > 0)];
         [self.nextButton setEnabled:(currentIndex < countAudios - 1)];
     }
